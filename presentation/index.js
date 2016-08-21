@@ -103,7 +103,7 @@ export default class Presentation extends React.Component {
           </Slide>
           <Slide bgColor="black">
             <Heading size={1} fit textColor="primary" textFont="primary">
-              Redux principles
+              Redux described by three principles
             </Heading>
             <Appear fid="1">
               <List textColor="primary">
@@ -113,9 +113,27 @@ export default class Presentation extends React.Component {
               </List>
             </Appear>
           </Slide>
-          <Slide bgColor="primary">
-            <Heading size={1} caps textColor="black" textFont="primary">
+          <Slide bgColor="black">
+            <Heading size={1} fit textColor="primary" textFont="primary">
+              Redux basics
+            </Heading>
+            <Appear>
+              <List textColor="primary">
+                <ListItem>Actions</ListItem>
+                <ListItem>Reducers</ListItem>
+                <ListItem>Store</ListItem>
+              </List>
+            </Appear>
+          </Slide>
+          <Slide bgColor="black">
+            <Heading size={1} textColor="primary" textFont="primary">
               Actions
+            </Heading>
+            <Text textColor="primary">Actions are payloads of information that send data from your application to your store. They are the only source of information for the store.</Text>
+          </Slide>
+          <Slide bgColor="primary">
+            <Heading size={1} caps textcolor="black" textFont="primary">
+              Actions example
             </Heading>
             <CodePane lang="js" source={require("raw!../assets/action.example")} margin="20px auto" />
           </Slide>
