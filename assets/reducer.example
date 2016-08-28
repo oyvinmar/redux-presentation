@@ -1,0 +1,13 @@
+const initialState = []
+
+function slideReducer(state = initialState, action) {
+  switch (action.type) {
+    case ADD_SLIDE:
+      return [...state, {
+        heading: action.payload.heading,
+        text: action.payload.text
+      }];
+    default:
+      return state
+  }
+}

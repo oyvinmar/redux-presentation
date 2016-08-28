@@ -9,6 +9,7 @@ import {
   CodePane,
   Deck,
   Heading,
+  Code,
   Image,
   Link,
   ListItem,
@@ -32,14 +33,27 @@ require("spectacle/lib/themes/default/index.css");
 
 const images = {
   fluxDiagram: require("../assets/flux-diagram.png"),
-  fluxSimpleDiagram: require("../assets/flux-simple-diagram.png")
+  fluxSimple: require("../assets/flux.png"),
+  fluxSimpleDiagram: require("../assets/flux-simple-diagram.png"),
+  mvcSimple: require("../assets/mvc1.png"),
+  mvcComplex: require("../assets/mvc2.png")
 };
 
 preloader(images);
 
 const theme = createTheme({
-  primary: "#ff4081"
+  primary: "#009682",
+  secondary: "#424242",
+  tertiary: "#FDFDFD",
+  quartenary: "white"
 });
+
+theme.screen.components.codePane.pre.fontSize = "1.5rem";
+theme.screen.components.image.margin = "1.5rem auto";
+theme.screen.components.listItem.fontSize = "3.5rem";
+theme.screen.components.listItem.fontWeight = "500";
+
+const AppearListItem = ({children}) => <Appear><ListItem>{children}</ListItem></Appear>;
 
 export default class Presentation extends React.Component {
   render() {
@@ -47,98 +61,129 @@ export default class Presentation extends React.Component {
       <Spectacle theme={theme}>
         <Deck transition={["slide"]} transitionDuration={500}>
           <Slide bgColor="primary">
-            <Heading size={1} fit caps lineHeight={1} textColor="black">
+            <Heading size={1} fit caps lineHeight={1}>
               Redux
             </Heading>
-            <Heading size={1} fit>
+            <Heading size={1} fit textColor="secondary">
               What, Why, How and some awesomeness
             </Heading>
             <Link href="https://github.com/oyvinmar/redux-presentation">
               <Text textColor="tertiary">View on Github</Text>
             </Link>
           </Slide>
-          <Slide bgColor="black">
-            <Heading size={1} caps fit textColor="primary" textFont="primary">
+          <Slide >
+            <Heading size={1} caps fit textColor="secondary">
               Background
             </Heading>
-            <Appear fid="1">
-              <List textColor="primary">
-                <ListItem>Evolves the ideas of <b>FLUX</b></ListItem>
-                <ListItem>Simplifies complexity by taking cues from <b>Elm</b></ListItem>
-                <ListItem>Created by <b>Dan Abramov</b> and Andrew Chen</ListItem>
+              <List textColor="tertiary">
+                <AppearListItem>Evolves the ideas of <b>FLUX</b></AppearListItem>
+                <AppearListItem>Simplifies complexity by taking cues from <b>Elm</b></AppearListItem>
+                <AppearListItem>Created by <b>Dan Abramov</b> and Andrew Chen</AppearListItem>
               </List>
-            </Appear>
+          </Slide>
+          <Slide bgColor="tertiary" notes="Bidirectional data flow between models and views">
+            <Heading size={2} textColor="secondary">
+              MVC (in theory)
+            </Heading>
+            <Image width="70%" src={images.mvcSimple}/>
+          </Slide>
+          <Slide bgColor="tertiary">
+            <Heading size={2} textColor="secondary">
+              MVC (in practice)
+            </Heading>
+            <Image width="70%" src={images.mvcComplex}/>
           </Slide>
           <Slide bgColor="primary">
-            <Heading size={1} caps textColor="black" textFont="primary">
-              Flux
+            <Heading size={2} textColor="secondary">
+              Flux (in theory)
             </Heading>
-            <Text textColor="tertiary">Unidirectional data flow</Text>
-            <Image width="100%" src={images.fluxSimpleDiagram}/>
+            <Image width="70%" src={images.fluxSimple}/>
           </Slide>
-          <Slide bgColor="primary">
-            <Heading size={1} caps textColor="black" textFont="primary">
-              MVC
+          <Slide bgColor="tertiary">
+            <Heading size={2} textColor="secondary">
+              Flux (in practice)
             </Heading>
-            <Text textColor="tertiary">Bidirectional data flow between models and views</Text>
+            <Image width="70%" src={images.fluxSimple}/>
           </Slide>
-          <Slide transition={["slide"]} bgColor="black">
+          <Slide transition={["slide"]} bgColor="secondary">
             <BlockQuote>
               <Quote>Predictable state container for JavaScript apps</Quote>
               <Cite>Redux documentation</Cite>
             </BlockQuote>
           </Slide>
-          <Slide bgColor="black">
-            <Heading size={1} fit textColor="primary" textFont="primary">
+          <Slide bgColor="primary">
+            <Heading size={2} textColor="tertiary">
               Why Redux?
             </Heading>
-            <Appear fid="1">
-              <List textColor="primary">
-                <ListItem>Separation of concerns</ListItem>
-                <ListItem>Driven by functional programming principles</ListItem>
-                <ListItem>Ace developer experience</ListItem>
-                <ListItem>Mostly framework agnostic</ListItem>
-              </List>
-            </Appear>
+            <List textColor="secondary">
+              <AppearListItem>Separation of concerns</AppearListItem>
+              <AppearListItem>Driven by functional programming principles</AppearListItem>
+              <AppearListItem>Ace developer experience</AppearListItem>
+              <AppearListItem>Mostly framework agnostic</AppearListItem>
+            </List>
           </Slide>
-          <Slide bgColor="black">
+          <Slide bgColor="secondary">
             <Heading size={1} fit textColor="primary" textFont="primary">
               Redux described by three principles
             </Heading>
-            <Appear fid="1">
-              <List textColor="primary">
-                <ListItem>Single source of truth</ListItem>
-                <ListItem>State is only changed by emitting and action</ListItem>
-                <ListItem>Mutations described by pure functions</ListItem>
-              </List>
-            </Appear>
+            <List textColor="tertiary">
+              <AppearListItem>Single source of truth</AppearListItem>
+              <AppearListItem>State is only changed by emitting and action</AppearListItem>
+              <AppearListItem>Mutations described by pure functions</AppearListItem>
+            </List>
           </Slide>
-          <Slide bgColor="black">
-            <Heading size={1} fit textColor="primary" textFont="primary">
+          <Slide bgColor="secondary">
+            <Heading size={1} textColor="primary" textFont="primary">
               Redux basics
             </Heading>
-            <Appear>
-              <List textColor="primary">
-                <ListItem>Actions</ListItem>
-                <ListItem>Reducers</ListItem>
-                <ListItem>Store</ListItem>
-              </List>
-            </Appear>
+            <List textColor="tertiary">
+              <AppearListItem>Actions</AppearListItem>
+              <AppearListItem>Reducers</AppearListItem>
+              <AppearListItem>Store</AppearListItem>
+            </List>
           </Slide>
-          <Slide bgColor="black">
+          <Slide bgColor="secondary">
             <Heading size={1} textColor="primary" textFont="primary">
               Actions
             </Heading>
-            <Text textColor="primary">Actions are payloads of information that send data from your application to your store. They are the only source of information for the store.</Text>
+            <Text textColor="tertiary">Actions are payloads of information that send data from your application to your store. They are the only source of information for the store.</Text>
           </Slide>
           <Slide bgColor="primary">
-            <Heading size={1} caps textcolor="black" textFont="primary">
+            <Heading size={2} textColor="secondary" textFont="primary">
               Actions example
             </Heading>
             <CodePane lang="js" source={require("raw!../assets/action.example")} margin="20px auto" />
           </Slide>
-          <Slide transition={["spin", "slide"]} bgColor="tertiary">
-            <Heading size={1} caps fit lineHeight={1.5} textColor="primary">
+          <Slide bgColor="secondary">
+            <Heading size={2} textColor="primary" textFont="primary">
+              Reducers
+            </Heading>
+            <Text textColor="tertiary">Reducers specify how the application's state changes in response to actions</Text>
+          </Slide>
+          <Slide bgColor="primary">
+            <Heading size={6} textColor="secondary" textFont="primary">
+              Reducers are pure functions
+            </Heading>
+            <Code bgColor="primary" textColor="tertiary">(previousState, action) => newState</Code>
+          </Slide>
+          <Slide bgColor="secondary">
+            <Heading size={1} textColor="primary" textFont="primary">
+              Reducers rules
+            </Heading>
+            <List textColor="tertiary">
+              <AppearListItem>Never mutate its arguments</AppearListItem>
+              <AppearListItem>Never preform side effect (like API calls)</AppearListItem>
+              <AppearListItem>Never call non-pure function {`(like Date.now())`} </AppearListItem>
+            </List>
+          </Slide>
+          <Slide bgColor="primary">
+            <Heading size={1} caps textColor="secondary" textFont="primary">
+              Reducer example
+            </Heading>
+            <CodePane lang="js" source={require("raw!../assets/reducer.example")} margin="20px auto" />
+          </Slide>
+          <Slide transition={["spin", "slide"]} bgColor="primary">
+            <Heading size={1} caps fit lineHeight={1.5} textColor="secondary">
               That's all folks
             </Heading>
           </Slide>
